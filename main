@@ -1,0 +1,28 @@
+package com.company;
+
+public class Main {
+
+	public static void main(String[] args) {
+		MyList myList = new MyList();
+		myList.add(12);
+		myList.add(24);
+		myList.add(36);
+		myList.add(80);
+		myList.add(35);
+		myList.add(98);
+		myList.indexAt(4);
+		System.out.println(myList);
+		myList.swap(2, 4);
+		System.out.println(myList);
+		myList.swap(0, 3);
+		System.out.println(myList);
+		// myList.swap(-30, 80);
+		//myList.indexAt(30);
+		//myList.indexAt(45);
+		//System.out.println(myList);
+		//myList.swap(5, 0);
+		System.out.println(myList);
+
+
+	}
+}
