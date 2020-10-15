@@ -1,0 +1,157 @@
+package com.company;
+
+public class MyList {
+	class Item {
+		private int value;
+		private Item next;
+
+		public Item(int value) {
+			this.value = value;
+			this.next = null;
+
+		}
+
+		public boolean hasNext() {
+			if (this.next != null) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public String toString() {
+			return Long.toString(this.value);
+		}
+
+		public int getValue() {
+			return value;
+		}
+
+		public void setValue(int value) {
+			this.value = value;
+		}
+
+		public Item getNext() {
+			return next;
+		}
+
+		public void setNext(Item next) {
+			this.next = next;
+		}
+	}
+
+	private Item begin;
+	private long counter;
+
+	public MyList() {
+		this.begin = null;
+		this.counter = 0;
+	}
+
+	public long getCounter() {
+		return counter;
+	}
+
+	public void add(int value) {
+		Item item = new Item(value);
+		if (this.begin == null) {
+			this.begin = item;
+		} else {
+			end().setNext(item);
+		}
+		this.counter++;
+	}
+
+	public Item end() {
+		if (this.begin == null)
+			return null;
+		Item iter = this.begin;
+		while (iter.hasNext()) {
+			iter = iter.getNext();
+		}
+		return iter;
+	}
+
+	public String toString() {
+		String result = "[ ";
+		if (this.begin == null) {
+			return null;
+		} else {
+			Item iter = this.begin;
+			while (iter.hasNext()) {
+				result += iter.toString() + ", ";
+				iter = iter.getNext();
+			}
+			result += iter.toString();
+		}
+		result += " ]";
+		return result;
+	}
+	public void swap(int firstPost,int secondPost){
+		Item Postone = indexAt(firstPost -1);
+		Item Postoneznach = indexAt(firstPost);
+		Item Postoneposle = indexAt(firstPost +1);
+		Item Posttwo = indexAt(secondPost -1);
+		Item Posttwoznach = indexAt(secondPost);
+		Item Posttwoposle = indexAt(secondPost + 1);
+
+		if ( Postone != null){
+			Postone.setNext(Posttwoznach);
+		}
+		else{
+			this.begin = Posttwoznach;
+		}
+		Postoneznach.setNext(Posttwoposle);
+		if(Posttwo == Postoneznach){
+			Posttwoznach.setNext(Postoneznach);
+		}
+		else{
+			Posttwoznach.setNext(Postoneposle);
+			Posttwo.setNext(Postoneznach);
+		}
+	}
+
+
+	public Item indexAt ( int index){
+		if ((index <= this.counter - 1) & (index >= 0)) {
+			Item p = begin;
+			for (; index > 0; --index) {
+				p = p.getNext();
+			}
+			System.out.println(p);
+			return p;
+		} else
+			return null;
+	}
+
+	public void sort(){
+		long count=this.counter;
+		int x;
+		int y;
+		Item temp1;
+		Item temp2;
+		while(count >0){
+			x = 0;
+			y = 1;
+			temp1 = indexAt(x);
+			temp2 = indexAt(y);
+			while (y <count){
+				if(temp1.getValue()> temp2.getValue()){
+					swap(x,y);
+					x += 1;
+					y += 1;
+					temp1 = indexAt(x);
+					temp2 = indexAt(y);
+				}
+				else if(temp1.getValue() <= temp2.getValue()){
+					++x;
+					++y;
+					temp1= temp1.getNext();
+					temp2 = temp2.getNext();
+				}
+			}
+			--count;
+		}
+	}
+}
+
